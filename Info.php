@@ -13,7 +13,7 @@ return [
     'name'          =>  $core->lang['embededvideoplayer']['module_name'],
     'description'   =>  $core->lang['embededvideoplayer']['module_desc'],
     'author'        =>  'p.dev',
-    'version'       =>  '1.0',
+    'version'       =>  '1.0.1',
     'compatibility'    =>    '1.3.*',                                // Compatibility with Batflat version
     'icon'          =>  'film',                                 // Icon from http://fontawesome.io/icons/
 

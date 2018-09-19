@@ -61,15 +61,13 @@ class Admin extends AdminModule
             move_uploaded_file($_FILES['file_path']['tmp_name'], $dir."/".$_FILES['file_path']['name']);
 
             $row = array(
-                'icon' => $_POST['file_icon'],
                 'name' => $_POST['file_name'],
                 'slug' => $_POST['file_slug'],
-                'size' => $_FILES['file_path']['size'],
                 'file' => $_FILES['file_path']['name'],
                 'path' => url(UPLOADS.'/pdev_evp/'.$_FILES['file_path']['name'])
             );
 
-            if($query = $this->core->db('pdev_ftd')->save($row)){
+            if($query = $this->core->db('pdev_evp')->save($row)){
                 $this->notify('success', $this->core->lang['embededvideoplayer']['db_save_ok'].' '.$_POST['file_name'].' ('.$_FILES['file_path']['size'].'B)');
             }
             else{
@@ -128,7 +126,7 @@ class Admin extends AdminModule
                 $this->notify('failure', $this->core->lang['embededvideoplayer']['delete_file_failure']);
             } else {
                 $this->notify('success', $this->core->lang['embededvideoplayer']['delete_file_success']);
-                $this->core->db('pdev_ftd')->delete($id);
+                $this->core->db('pdev_evp')->delete($id);
             }
         }
         redirect(url([ADMIN, 'embededvideoplayer', 'index']));
