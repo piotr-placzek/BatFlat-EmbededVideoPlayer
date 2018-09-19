@@ -5,8 +5,8 @@
 *
 * @author       Piotr Płaczek <piotr@pplaczek.pl>
 * @copyright    2018 Piotr Płaczek <p.dev>
-* @license      MIT https://github.com/piotr-placzek/BatFlat-FilesToDownload/blob/master/LICENSE.md
-* @link         https://github.com/piotr-placzek/BatFlat-FilesToDownload/
+* @license      MIT https://github.com/piotr-placzek/BatFlat-EmbededVideoPlayer/blob/master/LICENSE.md
+* @link         https://github.com/piotr-placzek/BatFlat-EmbededVideoPlayer
 */
 
 return [
