@@ -1,7 +1,7 @@
 <?php
 /**
-* BatFlat - filestodownload Module by pplaczek.
-* Allows you to add to the page or post a list of files ready to be downloaded directly from the server.
+* BatFlat - EmbededVideoPlayer Module by pplaczek.
+* Allows you to upload a video clip and play it using the html5 player.
 *
 * @author       Piotr Płaczek <piotr@pplaczek.pl>
 * @copyright    2018 Piotr Płaczek <p.dev>
@@ -10,12 +10,12 @@
 */
 
 
-namespace Inc\Modules\FilesToDownload;
+namespace Inc\Modules\EmbededVideoPlayer;
 
 use Inc\Core\AdminModule;
 
 /**
- * FilesToDownload admin class
+ * EmbededVideoPlayer admin class
  */
 class Admin extends AdminModule
 {
@@ -23,7 +23,6 @@ class Admin extends AdminModule
      * Initialize module. Add fontawesome css.
      */
     public function init(){
-        $this->core->addCss('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
     }
 
     /**
@@ -40,25 +39,25 @@ class Admin extends AdminModule
     }
 
     /**
-     * GET: /admin/filestodownload/index
+     * GET: /admin/embededvideoplayer/index
      * Subpage method of the module
      *
      * @return string
      */
     public function getIndex()
     {
-        $entries = $this->core->db('pdev_ftd')->toArray();
+        $entries = $this->core->db('pdev_evp')->toArray();
         return $this->draw('index.html', ['entries' => $entries]);
     }
 
     /**
-     * Upload file into ~/uploads/pdev_ftd directory and add data into db
+     * Upload file into ~/uploads/pdev_evp directory and add data into db
      */
     public function postSaveFile()
     {
         dump($_FILES);
         if(is_uploaded_file($_FILES['file_path']['tmp_name'])) {
-            $dir = UPLOADS.'/pdev_ftd';
+            $dir = UPLOADS.'/pdev_evp';
             move_uploaded_file($_FILES['file_path']['tmp_name'], $dir."/".$_FILES['file_path']['name']);
 
             $row = array(
@@ -67,31 +66,31 @@ class Admin extends AdminModule
                 'slug' => $_POST['file_slug'],
                 'size' => $_FILES['file_path']['size'],
                 'file' => $_FILES['file_path']['name'],
-                'path' => url(UPLOADS.'/pdev_ftd/'.$_FILES['file_path']['name'])
+                'path' => url(UPLOADS.'/pdev_evp/'.$_FILES['file_path']['name'])
             );
 
             if($query = $this->core->db('pdev_ftd')->save($row)){
-                $this->notify('success', $this->core->lang['filestodownload']['db_save_ok'].' '.$_POST['file_name'].' ('.$_FILES['file_path']['size'].'B)');
+                $this->notify('success', $this->core->lang['embededvideoplayer']['db_save_ok'].' '.$_POST['file_name'].' ('.$_FILES['file_path']['size'].'B)');
             }
             else{
-                $this->notify('failure', $this->core->lang['filestodownload']['no_files']);
+                $this->notify('failure', $this->core->lang['embededvideoplayer']['no_files']);
             }
         }
         else{
-            $this->notify('failure', $this->core->lang['filestodownload']['no_files']);
+            $this->notify('failure', $this->core->lang['embededvideoplayer']['no_files']);
         }
 
-        redirect(url([ADMIN, 'filestodownload', 'index']));
+        redirect(url([ADMIN, 'embededvideoplayer', 'index']));
     }
 
     /**
-     * GET: /admin/filestodownload/modify
+     * GET: /admin/embededvideoplayer/modify
      * Subpage method of the module
      * @param id
      * @return string
      */
     public function getModify($id){
-        $row = $this->core->db('pdev_ftd')->oneArray($id);
+        $row = $this->core->db('pdev_evp')->oneArray($id);
         return $this->draw('modify.html', ['element' => $row]);
     }
 
@@ -99,20 +98,19 @@ class Admin extends AdminModule
      * Modify row in db
      */
     public function postModifyFile(){
-        if($this->core->db('pdev_ftd')->where('id', $_POST['id'])->update(
+        if($this->core->db('pdev_evp')->where('id', $_POST['id'])->update(
             [
                 'name' => $_POST['file_name'],
-                'slug' => $_POST['file_slug'],
-                'icon' => $_POST['file_icon'],
+                'slug' => $_POST['file_slug']
             ]
         )){
-            $this->notify('success', $this->core->lang['filestodownload']['modify_file_success']);
+            $this->notify('success', $this->core->lang['embededvideoplayer']['modify_file_success']);
         }
         else{
-            $this->notify('failure', $this->core->lang['filestodownload']['modify_file_failure']);
+            $this->notify('failure', $this->core->lang['embededvideoplayer']['modify_file_failure']);
         }
 
-        redirect(url([ADMIN, 'filestodownload', 'index']));
+        redirect(url([ADMIN, 'embededvideoplayer', 'index']));
     }
 
     /**
@@ -120,19 +118,19 @@ class Admin extends AdminModule
      * @param $id
      */
     public function getRemove($id){
-        $row = $this->core->db('pdev_ftd')->oneArray($id);
-        $file = UPLOADS.'/pdev_ftd/'.$row['file'];
+        $row = $this->core->db('pdev_evp')->oneArray($id);
+        $file = UPLOADS.'/pdev_evp/'.$row['file'];
 
         dump($file);
 
         if (file_exists($file)) {
             if (!unlink($file)) {
-                $this->notify('failure', $this->core->lang['filestodownload']['delete_file_failure']);
+                $this->notify('failure', $this->core->lang['embededvideoplayer']['delete_file_failure']);
             } else {
-                $this->notify('success', $this->core->lang['filestodownload']['delete_file_success']);
+                $this->notify('success', $this->core->lang['embededvideoplayer']['delete_file_success']);
                 $this->core->db('pdev_ftd')->delete($id);
             }
         }
-        redirect(url([ADMIN, 'filestodownload', 'index']));
+        redirect(url([ADMIN, 'embededvideoplayer', 'index']));
     }
 }
