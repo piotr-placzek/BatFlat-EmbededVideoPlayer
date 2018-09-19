@@ -2,29 +2,27 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{$lang.filestodownload.add_new}</h3>
+                <h3 class="panel-title">{$lang.embededvideoplayer.add_new}</h3>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>{$lang.filestodownload.th_name}</th>
-                                <th>{$lang.filestodownload.th_slug}</th>
-                                <th>{$lang.filestodownload.th_icon}</th>
-                                <th>{$lang.filestodownload.th_file}</th>
-                                <th>{$lang.filestodownload.th_actions}</th>
+                                <th>{$lang.embededvideoplayer.th_name}</th>
+                                <th>{$lang.embededvideoplayer.th_slug}</th>
+                                <th>{$lang.embededvideoplayer.th_file}</th>
+                                <th>{$lang.embededvideoplayer.th_actions}</th>
                             </tr>
                         </thead>
-                        <form action="{?=url([ADMIN, 'filestodownload', 'saveFile'])?}" method="POST"  enctype="multipart/form-data">
+                        <form action="{?=url([ADMIN, 'embededvideoplayer', 'saveFile'])?}" method="POST"  enctype="multipart/form-data">
                             <tbody>
                                 <tr>
                                     <td><input type="text" name="file_name" value=""></td>
                                     <td><input type="text" name="file_slug" value=""></td>
-                                    <td><input type="text" name="file_icon" value="download" placeholder="download"> <a href="https://fontawesome.com" target="blank"><i>(Go to FontAwesome)</i></a></td>
                                     <td><input type="file" name="file_path" value=""></td>
                                     <td>
-                                        <input type="submit" value="{$lang.filestodownload.btn_add}" class="btn btn-success" />
+                                        <input type="submit" value="{$lang.embededvideoplayer.btn_add}" class="btn btn-success" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -40,7 +38,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{$lang.filestodownload.manage}</h3>
+                <h3 class="panel-title">{$lang.embededvideoplayer.manage}</h3>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -48,11 +46,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>{$lang.filestodownload.th_name}</th>
-                                <th>{$lang.filestodownload.th_tag}</th>
-                                <th>{$lang.filestodownload.th_icon}</th>
-                                <th>{$lang.filestodownload.th_file}</th>
-                                <th>{$lang.filestodownload.th_actions}</th>
+                                <th>{$lang.embededvideoplayer.th_name}</th>
+                                <th>{$lang.embededvideoplayer.th_tag}</th>
+                                <th>{$lang.embededvideoplayer.th_file}</th>
+                                <th>{$lang.embededvideoplayer.th_actions}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,12 +57,11 @@
                             <tr>
                                 <td>{$value.id}</td>
                                 <td>{$value.name}</td>
-                                <td>{noparse}{$pdev_ftd.{/noparse}{$value.slug}}</td>
-                                <td><i class="fas fa-{$value.icon}"></i> ({$value.icon})</td>
+                                <td>{noparse}{$pdev_evp.{/noparse}{$value.slug}}</td>
                                 <td><a href="{$value.path}" target="balnk">{$value.file}</a></td>
                                 <td>
-                                    <a href="{?= url('admin/filestodownload/modify/{$value.id}') ?}" class="btn btn-warning">{$lang.filestodownload.btn_change}</a>
-                                    <a href="{?= url('admin/filestodownload/remove/{$value.id}') ?}" class="btn btn-danger">{$lang.filestodownload.btn_remove}</a>
+                                    <a href="{?= url('admin/embededvideoplayer/modify/{$value.id}') ?}" class="btn btn-warning">{$lang.embededvideoplayer.btn_change}</a>
+                                    <a href="{?= url('admin/embededvideoplayer/remove/{$value.id}') ?}" class="btn btn-danger">{$lang.embededvideoplayer.btn_remove}</a>
                                 </td>
                             </tr>
                             {/loop}
