@@ -1,7 +1,7 @@
 <?php
 /**
-* BatFlat - FilesToDownload Module by pplaczek.
-* Allows you to add to the page or post a list of files ready to be downloaded directly from the server.
+* BatFlat - EmbededVideoPlayer Module by pplaczek.
+* Allows you to upload a video clip and play it using the html5 player.
 *
 * @author       Piotr Płaczek <piotr@pplaczek.pl>
 * @copyright    2018 Piotr Płaczek <p.dev>
@@ -10,12 +10,12 @@
 */
 
 
-namespace Inc\Modules\FilesToDownload;
+namespace Inc\Modules\EmbededVideoPlayer;
 
 use Inc\Core\SiteModule;
 
 /**
- * FilesToDownload site class
+ * EmbededVideoPlayer site class
  */
 class Site extends SiteModule
 {
@@ -28,22 +28,21 @@ class Site extends SiteModule
     public function init()
     {
         // Add styles
-        $this->core->addCss('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
-        $this->core->addCss(url('inc/modules/filestodownload/view/pdev_ftd.css'));
+        $this->core->addCss(url('inc/modules/embededvideoplayer/view/pdev_evp.css'));
 
         // Get db items
-        $files = $this->core->db('pdev_ftd')->toArray();
+        $files = $this->core->db('pdev_evp')->toArray();
 
         // Create assigns array
         $assign = array();
         dump($files);
         foreach ($files as $file) {
             dump($file);
-            $view = $this->draw('fileToDownload.html', ['ftd' => $file]);
+            $view = $this->draw('embededVideoPlayer.html', ['evp' => $file]);
             $assign[$file['slug']] = $view;
         }
 
         // Create user tag
-        $this->tpl->set('pdev_ftd', $assign);
+        $this->tpl->set('pdev_evp', $assign);
     }
 }
