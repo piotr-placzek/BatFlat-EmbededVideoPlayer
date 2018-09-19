@@ -1,3 +1,12 @@
-.pdev_evp{}
-.pdev_evp .title{}
-.pdev_evp video{}
+.pdev_evp{
+    text-align: center;
+}
+
+.pdev_evp .title{
+    font-weight: bold;
+}
+
+.pdev_evp video{
+    max-width: 640px;
+    max-height: 480px;
+}
